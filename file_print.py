@@ -1,7 +1,12 @@
-def file_print(f,f_sp):
-    if len(f_sp) == 2 :
-        print(f"this is file, file name is {f_sp[0]}")
-    else:
-        print(f"this is folder, folder name is {f_sp[0]}")
+from os import listdir
+import os 
+import tkinter as tk
+import TK_call_window
+def file_print(f,mypath):
+    file_path = mypath + '\\' + f  
+    with open(file_path,"r") as file :
+        app = tk.Tk()
+        label_text = tk.Label(app,text = file.read() )
+        label_text.pack()
 if __name__ == "__main__":
     pass
