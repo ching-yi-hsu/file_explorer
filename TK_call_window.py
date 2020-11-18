@@ -14,14 +14,34 @@ def show_on_same_window(window, new_file_path):
     tk_window(new_file_path)
     
 
-def tk_window(mypath):  
+def create_path_search(window):
+    path_text = tk.StringVar()
+    command = lambda x = path_text: sucking_time_fucker(x)
+    path_text_frame = tk.Frame(window)
+    tk.Entry(path_text_frame, textvariable=path_text).pack(side="left")
+    tk.Button(path_text_frame, text="open legs", command=command).pack(side="right")
+    path_text_frame.pack()
+    return path_text
+
+
+def sucking_time_fucker(path_text):
+    print(path_text.get())
+    path_text.set("suck my dick")
+
+
+def tk_window(my_path):
     window = tk.Tk()
     window.title('File Explore')
     window.geometry('600x500')
     file_frames = []
     file_label = []
     file_boutton = []
-    files = os.listdir(mypath)
+    files = os.listdir(my_path)
+    search_text = create_path_search(window)
+    search_text.set(my_path)
+    
+    
+    
 
     for f in files:
         file_frame = tk.Frame(window,height=5,bd = 5 ,background = "pink")
@@ -29,13 +49,13 @@ def tk_window(mypath):
         
         
         if not os.path.isdir(f):
-            command = get_inside_file_command(f, mypath)
+            command = get_inside_file_command(f, my_path)
             file_boutton = tk.Button(file_frame, text = "Get Inside", command = command  )
             file_boutton.pack(side = "right")
             file_label = tk.Label(file_frame, text = f )
             file_label.pack(side = "left")
         else:
-            file_path = f"{mypath}\{f}" 
+            file_path = f"{my_path}\{f}" 
             command = get_inside_dir_command(file_path)
 
             file_boutton = tk.Button(file_frame, text = "Get Inside", command = command)
